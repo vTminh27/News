@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/layoutTop"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textViewTopStories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOP STORIES"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/recyclerStories"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutBottom"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTop"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewNews"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="NEWS"
+            android:textColor="#4A4A4A"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerNews"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+<!--    <androidx.constraintlayout.utils.widget.ImageFilterButton-->
+<!--        app:layout_constraintStart_toStartOf="@id/recyclerNews"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/recyclerNews"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:id="@+id/buttonPrev"-->
+<!--        style="@style/TextAppearance.AppCompat"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:background="@drawable/ic_prev"-->
+<!--        android:onClick="prevClick"-->
+<!--        android:text=""-->
+<!--        tools:ignore="SpeakableTextPresentCheck" />-->
+
+<!--    <androidx.constraintlayout.utils.widget.ImageFilterButton-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:id="@+id/buttonNext"-->
+<!--        style="@style/TextAppearance.AppCompat"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:background="@drawable/ic_next"-->
+<!--        android:onClick="nextClick"-->
+<!--        android:text=""-->
+<!--        tools:ignore="SpeakableTextPresentCheck" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
