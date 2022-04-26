@@ -2,12 +2,23 @@ package com.example.news;
 
 import android.media.Image;
 
-public class Story {
+import java.io.Serializable;
+
+public class Story implements Serializable {
 
     private int id;
     private String imageName;
     private String title;
     private String content;
+    private String shortContent;
+
+    public Story(int id, String imageName, String title, String content, String shortContent) {
+        this.id = id;
+        this.imageName = imageName;
+        this.title = title;
+        this.content = content;
+        this.shortContent = shortContent;
+    }
 
     public Story(int id, String imageName, String title, String content) {
         this.id = id;
@@ -32,6 +43,8 @@ public class Story {
         return content;
     }
 
+    public String getShortContent() { return shortContent; }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -46,5 +59,9 @@ public class Story {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setShortContent(String shortContent) {
+        this.shortContent = shortContent;
     }
 }

@@ -1,8 +1,14 @@
 package com.example.news;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
 
@@ -15,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerViewAdapter recyclerViewTopStoriesAdapter;
 
     RecyclerView recyclerViewNews;
-    RecyclerViewAdapter recyclerViewNewsAdapter;
+    NewsRecyclerViewAdapter recyclerViewNewsAdapter;
 
     List<Story> topStoryList = new ArrayList<>();
     List<Story> newsList = new ArrayList<>();
@@ -31,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
     };
 
+    String[] shortContent = {
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < imageNames.length; i++) {
             Story story = new Story(i, squareImageNames[i], titles[i], content[i]);
-            Story news = new Story(i, imageNames[i], titles[i], content[i]);
+            Story news = new Story(i, imageNames[i], titles[i], content[i], shortContent[i]);
             topStoryList.add(story);
             newsList.add(news);
         }
@@ -53,17 +67,20 @@ public class MainActivity extends AppCompatActivity {
 
         // News
         recyclerViewNews = findViewById(R.id.recyclerNews);
-        recyclerViewNewsAdapter = new RecyclerViewAdapter(newsList, this);
+        recyclerViewNewsAdapter = new NewsRecyclerViewAdapter(newsList, this);
         recyclerViewNews.setAdapter(recyclerViewNewsAdapter);
 
-        LinearLayoutManager newsLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewNews.setLayoutManager(newsLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false);
+        recyclerViewNews.setLayoutManager(gridLayoutManager);
     }
 
-    public void prevClick(View view) {
-        recyclerViewTopStories.getLayoutManager().scrollToPosition(0);
-    }
-    public void nextClick(View view) {
-        recyclerViewTopStories.getLayoutManager().scrollToPosition(squareImageNames.length - 1);
+    public void showNewsDetails(Story story) {
+        Fragment fragment = DetailFragment.newInstance(story, newsList);
+
+        Log.d(this.toString(), "Story name: " + story.getTitle());
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.container, fragment).addToBackStack(null).commit();
     }
 }
